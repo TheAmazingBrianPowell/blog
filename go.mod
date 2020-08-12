@@ -1,7 +1,7 @@
 module github.com/TheAmazingBrianPowell/blog
 
 go 1.14
-// +heroku goVersion go1.12
+// +heroku goVersion go1.14
 
 require (
 	4d63.com/gochecknoglobals v0.0.0-20190306162314-7c3491d2b6ec // indirect
