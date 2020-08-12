@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"html"
 	"io"
@@ -10,6 +9,9 @@ import (
 	"os"
 	"strings"
 )
+
+const contentSecurityPolicyValue = "default-src none; script-src 'self'; img-src 'self'; media-src 'self'; style-src-elem 'self';"
+const contentSecurityPolicy = "Content-Security-Policy"
 
 func main() {
 	http.HandleFunc("/", mainHandler)
@@ -28,40 +30,16 @@ func main() {
 }
 
 func resourceHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Security-Policy", "default-src none; script-src 'self'; img-src 'self'; media-src 'self'; style-src-elem 'self';")
+	w.Header().Set(contentSecurityPolicy, contentSecurityPolicyValue)
 	if fileExists("public/" + r.URL.Path) {
 		http.ServeFile(w, r, "public/"+r.URL.Path)
 	} else {
 		write404(w)
 	}
-	/*var (
-		f *os.File
-		err error
-	)
-	f, err = os.Open("public/" + r.URL.Path)
-	defer f.Close()
-	if err != nil {
-		write404(w)
-	} else {
-		w.Header().Set("Content-Type", getFileContentType(r.URL.Path))
-		b := make([]byte, 4)
-		var out string
-		for {
-			readTotal, err := f.Read(b)
-			if err != nil {
-				if err != io.EOF {
-					fmt.Println(err)
-				}
-				break
-			}
-			out += string(b[:readTotal])
-		}
-		fmt.Fprintf(w, out)
-	}*/
 }
 
 func mainHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Security-Policy", "default-src none; script-src 'self'; img-src 'self'; media-src 'self'; style-src-elem 'self';")
+	w.Header().Set(contentSecurityPolicy, contentSecurityPolicyValue)
 	var (
 		f   *os.File
 		err error
@@ -96,10 +74,11 @@ func mainHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func blogHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Security-Policy", "default-src none; script-src 'self'; img-src 'self'; media-src 'self'; style-src-elem 'self';")
+	w.Header().Set(contentSecurityPolicy, contentSecurityPolicyValue)
 	out, err := interpretToHTML("public" + r.URL.Path)
 	if err != nil {
 		write404(w)
+		fmt.Println(err)
 	}
 	fmt.Fprintf(w, out)
 }
@@ -108,23 +87,29 @@ func interpretToHTML(filename string) (output string, err error) {
 	var f *os.File
 
 	f, err = os.Open(filename + ".txt")
+	defer f.Close()
 
 	if err != nil {
 		return
 	}
-
-	defer f.Close()
-
-	scanner := bufio.NewScanner(f)
-	scanner.Split(bufio.ScanBytes)
+	b := make([]byte, 1)
 	var title string
 	isCode := 0
 	isInCode := false
 	started := false
 	var lastChar string
 	firstLine := true
-	for scanner.Scan() {
-		if str := scanner.Text(); str == "`" {
+
+	for {
+		var readTotal int
+		readTotal, err = f.Read(b)
+		if err != nil {
+			if err != io.EOF {
+				return
+			}
+			break
+		}
+		if str := string(b[:readTotal]); str == "`" {
 			if isInCode {
 				isCode--
 			} else {
@@ -161,10 +146,6 @@ func interpretToHTML(filename string) (output string, err error) {
 	}
 
 	output += "</p></main></body></html>"
-
-	if err := scanner.Err(); err != nil {
-		fmt.Println(err)
-	}
 	return
 }
 
