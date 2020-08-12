@@ -76,7 +76,7 @@ func mainHandler(w http.ResponseWriter, r *http.Request) {
 func blogHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set(contentSecurityPolicy, contentSecurityPolicyValue)
 	out, err := interpretToHTML("public" + r.URL.Path)
-	if err != nil {
+	if err != io.EOF {
 		write404(w)
 		fmt.Println(err)
 	}
