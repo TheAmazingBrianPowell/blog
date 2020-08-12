@@ -1,0 +1,18 @@
+body {
+	background: #EEE;
+	color: black;
+}
+pre {
+	background: #DDD;
+	border-radius:5px;
+	padding:5px;
+}
+@media screen and (prefers-color-scheme: dark) {
+	body {
+		background: #222;
+		color: white;
+	}
+	pre {
+		background: #333;
+	}
+}
