@@ -4,11 +4,11 @@ import (
 	"bufio"
 	"fmt"
 	"html"
+	"io"
 	"log"
 	"net/http"
 	"os"
 	"strings"
-	"io"
 )
 
 func main() {
@@ -23,7 +23,7 @@ func main() {
 func resourceHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Security-Policy", "default-src none; script-src 'self'; img-src 'self'; media-src 'self'; style-src-elem 'self';")
 	if fileExists("public/" + r.URL.Path) {
-		http.ServeFile(w, r, "public/" + r.URL.Path)
+		http.ServeFile(w, r, "public/"+r.URL.Path)
 	} else {
 		write404(w)
 	}
@@ -56,14 +56,14 @@ func resourceHandler(w http.ResponseWriter, r *http.Request) {
 func mainHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Security-Policy", "default-src none; script-src 'self'; img-src 'self'; media-src 'self'; style-src-elem 'self';")
 	var (
-		f *os.File
+		f   *os.File
 		err error
 	)
 	if r.URL.Path != "/" {
 		//if nameLoc := strings.Index(r.URL.Path, "."); nameLoc != -1 {
 		//	f, err = os.Open(r.URL.Path[:nameLoc] + ".html")
 		//} else {
-			f, err = os.Open("public/" + r.URL.Path + ".html")
+		f, err = os.Open("public/" + r.URL.Path + ".html")
 		//}
 	} else {
 		f, err = os.Open("public/index.html")
@@ -162,11 +162,11 @@ func interpretToHTML(filename string) (output string, err error) {
 }
 
 func fileExists(filename string) bool {
-    info, err := os.Stat(filename)
-    if os.IsNotExist(err) {
-        return false
-    }
-    return !info.IsDir()
+	info, err := os.Stat(filename)
+	if os.IsNotExist(err) {
+		return false
+	}
+	return !info.IsDir()
 }
 
 func write404(w http.ResponseWriter) {
