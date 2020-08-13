@@ -1,6 +1,7 @@
 module github.com/TheAmazingBrianPowell/blog
 
 go 1.14
+
 // +heroku goVersion go1.14
 
 require (
@@ -14,5 +15,6 @@ require (
 	github.com/kisielk/errcheck v1.4.0 // indirect
 	github.com/kisielk/gotool v1.0.0 // indirect
 	github.com/mdempsky/maligned v0.0.0-20180708014732-6e39bd26a8c8 // indirect
+	github.com/securego/gosec v0.0.0-20200401082031-e946c8c39989 // indirect
 	github.com/walle/lll v1.0.1 // indirect
 )

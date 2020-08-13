@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-const contentSecurityPolicyValue = "default-src none; script-src 'self'; img-src 'self'; media-src 'self'; style-src-elem 'self';"
+const contentSecurityPolicyValue = "default-src none; script-src 'self'; img-src 'self'; media-src 'self'; style-src-elem 'self'; style-src 'self';"
 const contentSecurityPolicy = "Content-Security-Policy"
 
 func main() {
