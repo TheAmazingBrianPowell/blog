@@ -9,6 +9,7 @@ pre {
 	border-radius: 5px;
 	padding: 5px;
 	text-align: left;
+	white-space: pre-wrap;
 }
 footer {
 	background: #DDD;
@@ -33,6 +34,7 @@ header > nav {
 	position:fixed;
 	right: 10px;
 	left: 10px;
+	top: 0px;
 }
 header > nav > a {
 	color: black;

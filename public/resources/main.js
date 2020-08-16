@@ -1,4 +1,4 @@
-var headerExpanded = false
+var headerExpanded = false;
 const bar1 = document.getElementById("bar1");
 const bar2 = document.getElementById("bar2");
 const bar3 = document.getElementById("bar3");
@@ -7,9 +7,8 @@ const navA = document.querySelectorAll("header > nav > a");
 const home = document.getElementById("home");
 const homeText = document.querySelector("#home > span");
 const search = document.querySelector("header > nav > form");
-document.querySelector("header > nav > button").addEventListener("click", toggleMenu);
-
-function toggleMenu() {
+alert(true);
+document.querySelector("header > nav > button").addEventListener("click", function() {
 	headerExpanded = !headerExpanded;
 	if(headerExpanded) {
 		bar1.style.transform = "rotate(135deg)";
@@ -43,7 +42,7 @@ function toggleMenu() {
 		home.style.display = "block";
 		homeText.style.display = "none";
 	}
-};
+});
 
 window.addEventListener("resize", function() {
 	if(innerWidth > 720) {
