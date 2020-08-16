@@ -1,13 +1,12 @@
 var headerExpanded = false;
-const bar1 = document.getElementById("bar1");
-const bar2 = document.getElementById("bar2");
-const bar3 = document.getElementById("bar3");
-const bar4 = document.getElementById("bar4");
-const navA = document.querySelectorAll("header > nav > a");
-const home = document.getElementById("home");
-const homeText = document.querySelector("#home > span");
-const search = document.querySelector("header > nav > form");
-alert(true);
+var bar1 = document.getElementById("bar1");
+var bar2 = document.getElementById("bar2");
+var bar3 = document.getElementById("bar3");
+var bar4 = document.getElementById("bar4");
+var navA = document.querySelectorAll("header > nav > a");
+var home = document.getElementById("home");
+var homeText = document.querySelector("#home > span");
+var search = document.querySelector("header > nav > form");
 document.querySelector("header > nav > button").addEventListener("click", function() {
 	headerExpanded = !headerExpanded;
 	if(headerExpanded) {
