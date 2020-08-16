@@ -78,6 +78,10 @@ func resourceHandler(w http.ResponseWriter, r *http.Request) {
 }*/
 
 func mainHandler(w http.ResponseWriter, r *http.Request) {
+	if strings.Contains(r.URL.Path, ".") {
+		resourceHandler(w, r)
+		return
+	}
 	w.Header().Set(contentSecurityPolicy, contentSecurityPolicyValue)
 	out, err := interpretToHTML("public" + r.URL.Path)
 	ip := getIP(r)
@@ -153,9 +157,9 @@ func interpretToHTML(filename string) (output string, err error) {
 				inParagraph = false
 			} else if command == "title" {
 				if arg != "" {
-					output = "<html lang='en'><head><meta name='viewport' content='width=device-width, initial-scale=1'><title>" + arg + " | The Blob Blog</title><link rel='stylesheet' type='text/css' href='/resources/main.css'/></head><body><header><nav><a href='/'>Home</a><a href='/projects'>Projects</a><a href='/tutorials'>Coding Tutorials</a><a href='/music'>Music</a><button><div id='bar1'></div></button></nav></header><main>"
+					output = "<html lang='en'><head><meta name='viewport' content='width=device-width, initial-scale=1'><title>" + arg + " | The Blob Blog</title><link rel='stylesheet' type='text/css' href='/resources/main.css'/><script defer src = '/resources/main.js'></script></head><body><header><nav><a href='/' id = 'home'><img src='favicon.ico'><span>Home</span></a><a href='/projects'>Projects</a><a href='/tutorials'>Coding Tutorials</a><a href='/music'>Music</a><form><input placeholder='Search...'></form><button><div id='bar1'></div><div id='bar2'></div><div id='bar3'></div><div id='bar4'></div></button></nav></header><main>"
 				} else {
-					output = "<html lang='en'><head><meta name='viewport' content='width=device-width, initial-scale=1'><title>The Blob Blog</title><link rel='stylesheet' type='text/css' href='/resources/main.css'/></head><body><header><nav><a href='/'>Home</a><a href='/projects'>Projects</a><a href='/tutorials'>Coding Tutorials</a><a href='/music'>Music</a><button><div id='bar1'></div></button></nav></header><main>"
+					output = "<html lang='en'><head><meta name='viewport' content='width=device-width, initial-scale=1'><title>The Blob Blog</title><link rel='stylesheet' type='text/css' href='/resources/main.css'/><script defer src = '/resources/main.js'></script></head><body><header><nav><a href='/' id = 'home'><img src='favicon.ico'><span>Home</span></a><a href='/projects'>Projects</a><a href='/tutorials'>Coding Tutorials</a><a href='/music'>Music</a><form><input placeholder='Search...'></form><button><div id='bar1'></div><div id='bar2'></div><div id='bar3'></div><div id='bar4'></div></button></nav></header><main>"
 				}
 			} else if command == "img" {
 				output += "<img src = '" + arg + "'>"

@@ -1,18 +1,180 @@
 body {
 	background: #EEE;
 	color: black;
+	text-align: center;
+	font-family: georgia;
 }
 pre {
 	background: #DDD;
-	border-radius:5px;
-	padding:5px;
+	border-radius: 5px;
+	padding: 5px;
+	text-align: left;
 }
-@media screen and (prefers-color-scheme: dark) {
+footer {
+	background: #DDD;
+	text-align: center;
+}
+main > p {
+	max-width: 600px;
+	text-align: justify;
+}
+main {
+	max-width: 600px;
+	display: inline-block;
+	width: 100%;
+}
+header > nav {
+	background: #DDD;
+	display: flex;
+	position:fixed;
+	right: 10px;
+	left: 10px;
+}
+header > nav > a {
+	color: black;
+	font-family: arial;
+	padding: 10px;
+	padding-left: 20px;
+	padding-right:20px;
+	font-size: 20px;
+	display: inline-block;
+	text-decoration: none;
+	position: relative;
+}
+
+#bar1 {
+	position: relative;
+	background: black;
+	width: 80%;
+	height: 3px;
+	top: 4px;
+	margin: auto;
+	transition: all 300ms ease-in;
+}
+#bar2 {
+	position: relative;
+	background: black;
+	width: 80%;
+	height: 3px;
+	transition: all 300ms ease-in;
+	top: -6px;
+	margin: auto;
+}
+
+#bar3 {
+	position: relative;
+	background: black;
+	width: 80%;
+	height: 3px;
+	transition: all 300ms ease-in;
+	top: 5px;
+	margin: auto;
+}
+
+#bar4 {
+	position: relative;
+	background: black;
+	width: 80%;
+	height: 3px;
+	transition: all 300ms ease-in;
+	top: -5px;
+	margin: auto;
+}
+
+#home {
+	padding-left: 70px;
+}
+
+header > nav > a:hover {
+	background: #CCC;
+}
+h1, h2, h3, h4 {
+	font-family: arial;
+}
+header > nav > button {
+	display: none;
+}
+header > nav > form > input {
+	width: 100%;
+	height: 100%;
+}
+header > nav > form {
+	flex-grow: 1;
+	margin: 5px;
+	display: inline-block;
+	padding: 0px;
+}
+header > nav > a > img {
+	position: absolute;
+	height: 50px;
+	top: -10px;
+	left: 10px;
+}
+@media only screen and (prefers-color-scheme: dark) {
 	body {
 		background: #222;
 		color: white;
 	}
 	pre {
 		background: #333;
+	}
+	footer {
+		background: #333;
+		padding: 5px;
+	}
+	header > nav {
+		background: #333;
+	}
+	header > nav > a {
+		color: white;
+	}
+	header > nav > a:hover {
+		background: #444;
+	}
+}
+
+@media only screen and (max-width: 720px) {
+	header > nav > a {
+		display: none;
+		text-align: center;
+	}
+	header > nav > form {
+		display: none;
+		padding-left: 10px;
+		padding-right: 10px;
+		height: 33px;
+	}
+	header > nav {
+		text-align: left;
+		min-height: 43px;
+		display: block;
+	}
+	header > nav > button {
+		display: inline-block;
+		width: 33px;
+		height: 33px;
+		background: none;
+		border: none;
+		padding: 0px;
+		position: absolute;
+		right: 10px;
+		top: 5px;
+		overflow: hidden;
+	}
+	#home {
+		display: inline-block;
+		padding: 23px;
+		padding-left: 45px;
+		position: absolute;
+		margin: 0px;
+	}
+	#home > span {
+		display: none;
+	}
+	header > nav > button:hover {
+		cursor: pointer;
+	}
+	header > nav > button:focus {
+		cursor: pointer;
 	}
 }
