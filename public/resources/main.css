@@ -13,6 +13,7 @@ pre {
 footer {
 	background: #DDD;
 	text-align: center;
+	padding: 5px;
 }
 main > p {
 	max-width: 600px;
@@ -22,6 +23,9 @@ main {
 	max-width: 600px;
 	display: inline-block;
 	width: 100%;
+}
+header {
+	height: 43px;
 }
 header > nav {
 	background: #DDD;
@@ -111,6 +115,11 @@ header > nav > a > img {
 	left: 10px;
 }
 @media only screen and (prefers-color-scheme: dark) {
+	header > nav > form > input {
+		background: #222;
+		color: white;
+		border: 1px solid grey;
+	}
 	body {
 		background: #222;
 		color: white;
@@ -120,7 +129,6 @@ header > nav > a > img {
 	}
 	footer {
 		background: #333;
-		padding: 5px;
 	}
 	header > nav {
 		background: #333;
