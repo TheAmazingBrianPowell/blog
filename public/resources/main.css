@@ -101,6 +101,7 @@ header > nav > button {
 header > nav > form > input {
 	width: 100%;
 	height: 100%;
+	border-radius: 2px;
 }
 header > nav > form {
 	flex-grow: 1;
